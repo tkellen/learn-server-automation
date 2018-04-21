@@ -1,0 +1,10 @@
+{
+  "name": "learn-server-automation",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "marked": "^0.3.19",
+    "rimraf": "^2.6.2"
+  }
+}

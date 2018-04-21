@@ -1,15 +1,15 @@
 const fs = require('fs')
 const path = require('path')
-const express = require('express')
+const rimraf = require('rimraf')
 const marked = require('marked')
-const server = express()
-const exerciseDir = path.join(__dirname, '../..', 'exercises')
+const exerciseDir = path.join(__dirname, '..', 'exercises')
+const exercises = fs.readdirSync(exerciseDir)
 
 function titleize (word) {
   return word.split('-').slice(1).join(' ').toUpperCase()
 }
 function toAnchorList (items) {
-  const lis = items.map(item => `<li><a href="/${item}">${titleize(item)}</li>`)
+  const lis = items.map(item => `<li><a href="/${item}.html">${titleize(item)}</li>`)
   return `<ul>${lis.join('')}</ul>`
 }
 function page (content) {
@@ -55,26 +55,15 @@ function page (content) {
   </html>`
 }
 
-server.get('/', (req, res) => {
-  const exercises = fs.readdirSync('../../exercises')
-  res.send(page(`
-    <h1>Learn Server Automation With Ansible</h1>
-    ${toAnchorList(exercises)}
-  `))
-})
-
-server.get('/:exercise', (req, res) => {
-  try {
-    const source = path.join(exerciseDir, req.params.exercise, 'overview.md')
-    const content = fs.readFileSync(source, 'utf-8')
-    res.send(page(`
-      <a href='/'>&laquo; BACK</a><br>
-      ${marked(content)}
-      <br><a href='/'>&laquo; BACK</a>
-    `))
-  } catch (e) {
-    res.sendStatus(404)
-  }
-})
-
-server.listen(8080)
+const outputTo = path.join(__dirname, 'dist')
+rimraf.sync(outputTo)
+fs.mkdirSync(outputTo)
+fs.writeFileSync(path.join(outputTo, 'index.html'), page(`
+  <h1>Learn Server Automation With Ansible</h1>
+  ${toAnchorList(exercises)}
+`))
+exercises.forEach(exercise => fs.writeFileSync(path.join(outputTo, `${exercise}.html`), page(`
+  <a href='/'>&laquo; BACK</a><br>
+  ${marked(fs.readFileSync(path.join(exerciseDir, exercise, 'overview.md'), 'utf-8'))}
+  <br><a href='/'>&laquo; BACK</a>
+`)))
