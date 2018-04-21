@@ -1,0 +1,44 @@
+- hosts: all
+  become: yes
+  become_method: sudo
+  vars:
+    app_user: app
+    app_group: app
+    app_root: /mnt
+  tasks:
+    - name: ensure extra packages are available
+      yum:
+        name: epel-release
+        state: present
+
+    - name: ensure packages are installed
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - nodejs
+        - nginx
+
+    - name: ensure nginx is configured
+      template:
+
+    - name: ensure nginx has been restarted
+      systemd:
+
+    - name: ensure app group is created
+      group:
+
+    - name: ensure app user is created
+      user:
+
+    - name: ensure app code is on the box in /mnt
+      template:
+
+    - name: ensure location of nodejs is known
+      command: which node
+
+    - name: ensure service file for app is in place
+      template:
+
+    - name: ensure app is restarted
+      systemd:

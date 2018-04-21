@@ -1,0 +1,11 @@
+[Unit]
+Description=ApplicationTest
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+User={{app_user}}
+Group={{app_group}}
+Environment=API_KEY={{vault_api_key}}
+ExecStart={{node_path.stdout}} {{app_root}}/app.js

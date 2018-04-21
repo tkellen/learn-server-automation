@@ -1,0 +1,64 @@
+- hosts: all
+  become: yes
+  become_method: sudo
+  vars:
+    app_user: app
+    app_group: app
+    app_root: /mnt
+  vars_files:
+    - secrets.yml
+  tasks:
+    - name: ensure extra packages are available
+      yum:
+        name: epel-release
+        state: present
+
+    - name: ensure packages are installed
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - nodejs
+        - nginx
+
+    - name: ensure nginx is configured
+      template:
+        src: nginx.conf
+        dest: /etc/nginx/conf.d/
+
+    - name: ensure nginx has been restarted
+      systemd:
+        name: nginx
+        state: restarted
+
+    - name: ensure app group is created
+      group:
+        name: "{{app_group}}"
+
+    - name: ensure app user is created
+      user:
+        name: "{{app_user}}"
+        groups: "{{app_group}}"
+        shell: /bin/nologin
+
+    - name: ensure app code is on the box in /mnt
+      template:
+        src: app.js
+        dest: "{{app_root}}"
+
+    - name: ensure location of nodejs is known
+      command: which node
+      register: node_path
+
+    - name: ensure service file for app is in place
+      template:
+        src: app.service.j2
+        dest: /etc/systemd/system/app.service
+      register: service
+
+    - name: ensure app is restarted
+      systemd:
+        name: app
+        state: restarted
+        enabled: yes
+        daemon_reload: "{{service.changed}}"

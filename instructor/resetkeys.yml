@@ -1,0 +1,12 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: ensure existing host keys are removed
+      shell: rm /etc/ssh/ssh_host_*
+      args:
+        warn: False
+
+    - name: ensure host keys have been regenerated
+      systemd:
+        name: sshd-keygen
+        state: restarted

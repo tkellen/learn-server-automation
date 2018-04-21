@@ -1,0 +1,7 @@
+{
+  "name": "learn-server-automation",
+  "dependencies": {
+    "express": "^4.16.3",
+    "marked": "^0.3.19"
+  }
+}

@@ -1,0 +1,17 @@
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: show the distribution
+      debug:
+        var: ansible_distribution
+
+    - name: ensure extra packages are available
+      yum:
+        name: epel-release
+        state: present
+
+    - name: ensure nginx is installed
+      yum:
+        name: nginx
+        state: present

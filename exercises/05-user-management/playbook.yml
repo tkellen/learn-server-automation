@@ -1,0 +1,30 @@
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+#    - name: ensure workshop user is on the box
+#      user:
+#        state: present
+#        name: USERNAME
+#        shell: /bin/bash
+#        groups: wheel
+#
+#    - name: ensure workshop public key is present in authorized_keys
+#      authorized_key:
+#        user: USERNAME
+#        key: PUBLIC_KEY
+#        state: present
+#
+#    - name: ensure my user is on the box
+#      user:
+#        state: present
+#        name: USERNAME
+#        shell: /bin/bash
+#        groups: wheel
+#
+#    - name: ensure my public key is present in authorized_keys
+#      authorized_key:
+#        user: USERNAME
+#        key: PUBLIC_KEY
+#        state: present
+#

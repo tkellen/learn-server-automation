@@ -1,0 +1,22 @@
+- hosts: all
+  become: yes
+  become_method: sudo
+  vars:
+    install_cowsay: True
+    swap: True
+    swap_file_path: /swap
+    swap_file_size: 2GB
+  tasks:
+    - name: ensure extra packages are available
+      yum:
+        name: epel-release
+        state: present
+
+    - name: ensure cowsay is installed
+      yum:
+        name: cowsay
+        state: present
+      when: install_cowsay
+
+    - include: swap.yml
+      when: swap

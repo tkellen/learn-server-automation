@@ -1,0 +1,5 @@
+.vagrant/
+.terraform/
+node_modules/
+**/*.tfstate*
+**/*.retry

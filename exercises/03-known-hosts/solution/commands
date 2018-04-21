@@ -1,0 +1,3 @@
+chmod 400 privatekey.pem
+ssh-keygen -R calm.team
+ssh -i privatekey.pem workshop@calm.team

@@ -1,0 +1,13 @@
+# ansible-playbook -i 10.10.10.10, playbook.yml
+- hosts: all
+  # add a setting here to elevate to root
+  tasks:
+    - name: show the distribution
+      debug:
+        var: ansible_distribution
+
+#    - name: ensure extra packages are available
+#      yum:
+#
+#    - name: ensure nginx is installed
+#      yum:
