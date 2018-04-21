@@ -4,6 +4,7 @@
   vars:
     app_user: app
     app_group: app
+    app_port: 8080
     app_root: /mnt
   vars_files:
     - secrets.yml
@@ -25,6 +26,12 @@
       template:
         src: nginx.conf
         dest: /etc/nginx/conf.d/
+
+    - name: ensure nginx can communicate with upstream application
+      seboolean:
+        name: httpd_can_network_connect
+        state: yes
+        persistent: yes
 
     - name: ensure nginx has been restarted
       systemd:

@@ -1,6 +1,6 @@
 require 'webrick'
 
-PORT = ENV['PORT'] || 8000
+PORT = ENV['PORT'] || 8080
 
 Thread.abort_on_exception = true
 Thread.new do

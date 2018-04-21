@@ -6,7 +6,7 @@ from multiprocessing import Process
 from random import random
 from time import sleep
 
-PORT = getenv('process.env.PORT', 8000)
+PORT = getenv('process.env.PORT', 8080)
 
 def chaos():
     while True:

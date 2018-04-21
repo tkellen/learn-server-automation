@@ -23,6 +23,12 @@
         src: nginx.conf
         dest: /etc/nginx/conf.d/
 
+    - name: ensure nginx can communicate with upstream application
+      seboolean:
+        name: httpd_can_network_connect
+        state: yes
+        persistent: yes
+
     - name: ensure nginx has been restarted
       service:
         name: nginx

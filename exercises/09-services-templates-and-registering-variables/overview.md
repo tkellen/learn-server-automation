@@ -33,7 +33,7 @@ After=network.target
 [Service]
 Type=simple
 Restart=always
-ExecStart={{ which_node.stdout | default('/usr/bin/node') }} {{ node_app_path }}
+ExecStart=/usr/bin/node /mnt/app.js
 ```
 
 If this text was placed at `/etc/systemd/system/app.service`, it would become
@@ -54,7 +54,7 @@ sudo systemctl status app
 ### LOGGING
 
 Systemd provides a utility for viewing logs. To watch the running output of the
-aforementioned application, try the command `sudo journalctl -u -f app`.
+aforementioned application, try the command `sudo journalctl -f -u app`.
 
 ## TEMPLATES
 
@@ -71,12 +71,6 @@ and copy them to a remote server using the [template module]:
 
 Templates have access to all variables defined in a playbook. They will be
 interpolated if they are wrapped in curly brackets, like so: `{{ var_name }}`.
-
-The default filter can be handy if you wish to provide a default:
-
-```
-{{ var_name | default('Some Default Value') }}
-```
 
 ## REGISTERING VARIABLES
 
@@ -100,15 +94,9 @@ the start and end time and more.
 
 ## EXERCISE
 
-In this exercise we'll configure a service to run a small NodeJS application
-and serve it via NGINX.
-
-Populate the systemd script (`app.service.j2`) with template references that
-accept variables containing the full path to the NodeJS runtime and the
-application script (`app.js`).
-
-Then, refactor the included playbook to `register` the needed variables before
-the template task is called.
+In this exercise we'll configure a server to run a small NodeJS application
+and serve it via NGINX. A templated nginx configuration and systemd script has
+been provided. Complete the included playbook and deploy the configuration.
 
 You'll know you've been successful when you're able to visit http://10.10.10.10
 and your deployment scripts are using templates and variables.

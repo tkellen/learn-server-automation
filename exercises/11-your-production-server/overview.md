@@ -9,10 +9,11 @@ live server, accessible to everyone on the internet.
 Now it is time to spin up a new server with that provider so we can
 test our configuration in the wild.
 
-Visit https://cloud.digitalocean.com and log in with the username
-guest@calm.team and the password provided to you by the facilitator of the
-class. Then, create a CentOS VM to orchestrate, ensuring that you select the
-"workshop" ssh key be added (this will be associated with the user `root`).
+Visit https://calmteam.signin.aws.amazon.com/console and log in with the
+username and password provided to you by the facilitator of the class. Then,
+create a CentOS VM using the AMI `ami-b81dbfc5` to orchestrate, ensuring that
+you select the "workshop" ssh key be added (this will be associated with the
+user `centos`).
 
 Use your playbook from the previous exercise to deploy your application.
 
