@@ -1,0 +1,4 @@
+ssh-keygen -p -f privatekey.pem
+# change or add password
+chmod 400 privatekey.pem
+ssh -i privatekey.pem workshop@calm.team

@@ -1,0 +1,5 @@
+echo $SSH_AUTH_SOCK
+chmod 400 privatekey.pem
+ssh-add privatekey.pem
+ssh workshop@calm.team 'echo $SSH_AUTH_SOCK'
+ssh -A workshop@calm.team 'echo $SSH_AUTH_SOCK'
