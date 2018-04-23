@@ -16,7 +16,10 @@
       yum:
         name: cowsay
         state: present
-      when: install_cowsay
-
+        # Add conditional logic so this only runs when the install_cowsay var is true
+ 
     - include: swap.yml
-      when: swap
+      # Even includes can have conditionals applied to them! Try making this execute only when swap is true
+
+
+

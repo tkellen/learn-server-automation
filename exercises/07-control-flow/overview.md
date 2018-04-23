@@ -29,30 +29,6 @@ a slightly different manner than a production server using the same playbook.
 If you find yourself using the same when statement for multiple tasks, consider
 using a block.
 
-### BLOCKS
-
-[Blocks] can extend a conditional around a series of tasks and can also abort
-execution if any of the tasks fails. This is very similar to try/catch/finally
-in many programming languages.
-
-```
-- block:
-    - debug:
-        msg: I execute normally.
-    - command: /bin/false
-    - debug:
-        msg: I never execute, because the previous task exits non-zero.
-  rescue:
-    - debug:
-        msg: I caught an error
-    - command: /bin/false
-    - debug:
-        msg: I also never execute, because the previous task exits non-zero.
-  always:
-    - debug:
-        msg: I always execute.
-```
-
 ### INCLUDE
 
 Ansible also provides a means of including tasks that are defined in separate
