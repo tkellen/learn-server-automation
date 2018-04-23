@@ -4,6 +4,7 @@
   vars:
     app_user: app
     app_group: app
+    app_port: 8080
     app_root: /mnt
   tasks:
     - name: ensure extra packages are available
@@ -29,6 +30,12 @@
         name: nginx
         state: restarted
 
+    - name: ensure nginx can communicate with upstream application
+      seboolean:
+        name: httpd_can_network_connect
+        state: yes
+        persistent: yes
+
     - name: ensure app group is created
       group:
         name: "{{app_group}}"
@@ -44,7 +51,7 @@
         src: app.js
         dest: "{{app_root}}"
 
-    - name: ensure location of nodejs is known
+    - name: ensure location of node binary is known
       command: which node
       register: node_path
 

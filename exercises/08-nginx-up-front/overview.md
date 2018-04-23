@@ -36,7 +36,7 @@ Here is how we would specify an application as an "upstream":
 
 ```
 upstream app {
-  server localhost:8000;
+  server localhost:8080;
 }
 ```
 
@@ -87,7 +87,7 @@ starting one of the applications to accept the request:
 - `ssh 10.10.10.10 ruby /mnt/app.rb`
 
 Once you have a running application, try visiting both http://10.10.10.10 and
-http://10.10.10.10:8000. Note the difference in headers. The first address is
+http://10.10.10.10:8080. Note the difference in headers. The first address is
 serving the application through NGINX. The second is hitting the application
 directly (in a real production environment, application port would not be open
 to the public).

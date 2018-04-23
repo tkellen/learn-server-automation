@@ -18,6 +18,12 @@
     - name: ensure nginx is configured
       template:
 
+    - name: ensure nginx can communicate with upstream application
+      seboolean:
+        name: httpd_can_network_connect
+        state: yes
+        persistent: yes
+
     - name: ensure nginx has been restarted
       service:
 

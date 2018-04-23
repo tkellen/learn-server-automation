@@ -5,6 +5,7 @@ After=network.target
 [Service]
 Type=simple
 Restart=always
-User=
-Group=
-ExecStart=
+User={{app_user}}
+Group={{app_group}}
+Environment=PORT={{app_port}}
+ExecStart={{node_path.stdout}} {{app_root}}/app.js

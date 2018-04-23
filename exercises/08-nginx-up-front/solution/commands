@@ -15,8 +15,8 @@ ssh 10.10.10.10 python /mnt/app.py
 ssh 10.10.10.10 ruby /mnt/app.rb
 
 # browse to http://10.10.10.10
-# browse to http://10.10.10.10:8000
-# or run curl -i http://10.10.10.10 / curl -i http://10.10.10.10:8000
+# browse to http://10.10.10.10:8080
+# or run curl -i http://10.10.10.10 / curl -i http://10.10.10.10:8080
 # note the difference in headers
 
 vagrant destroy

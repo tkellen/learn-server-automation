@@ -3,7 +3,7 @@ const qs = require('querystring')
 const url = require('url')
 
 const API_KEY = process.env.API_KEY
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 8080
 
 if (!API_KEY) {
   console.log('API_KEY environment must be defined.')
