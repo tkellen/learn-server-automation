@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   # This VM is provided for Windows users who would otherwise need to install
   # Ansible using the Linux Subsystem for Windows.
   config.vm.define "controller", primary: true do |vb|
-    vb.vm.box = "bento/centos-7.3"
+    vb.vm.box = "bento/centos-7.4"
     vb.vm.synced_folder '.', '/mnt'
     vb.vm.network :private_network, ip: '10.10.10.100'
     vb.vm.provider "virtualbox" do |v|
@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "target" do |vb|
-    vb.vm.box = "bento/centos-7.3"
+    vb.vm.box = "bento/centos-7.4"
     vb.vm.network :private_network, ip: '10.10.10.10'
     vb.vm.provider "virtualbox" do |v|
       v.customize ["modifyvm", :id, "--cableconnected1", "on"]
